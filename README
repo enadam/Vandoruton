@@ -1,0 +1,9 @@
+This edition is for my great-aunt.  It was authored by one of her friends
+and she wished to read it before she is gone.  To compensate for her
+deteriorated eyesight I typeset this book with an easy to read font
+(DejaVu) and in large letters.  This posed unanticipated challenges with
+optimal line and paragraph breaking.  Other than the font I laid out
+everything exactly as in the original publication.  This wasn't trivial
+either because of the smaller real estate on the paper.
+
+Compile it with `pdflatex 00-book'.

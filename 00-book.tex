@@ -1,0 +1,120 @@
+\documentclass[a4paper,extrafontsizes,20pt]{memoir}
+\PassOptionsToPackage{captions=unchanged,longcaption=none}{magyar.ldf}
+\usepackage[utf8]{inputenc}
+\usepackage[pass]{geometry}
+\usepackage{dejavu}
+\usepackage{wasysym}
+\usepackage[magyar]{babel}
+\usepackage{calc}
+\usepackage{graphicx}
+
+\setbinding{1cm}
+\setlrmarginsandblock{0.5cm}{0.5cm}{*}
+\setulmarginsandblock{0.5cm}{0.5cm}{*}
+\setheadfoot{0cm}{0cm}
+\setheaderspaces{*}{0cm}{*}
+\settypeoutlayoutunit{mm}
+\checkandfixthelayout[fixed]
+\savegeometry{normal}
+
+\pagestyle{empty}
+
+\setsecnumdepth{none}
+\aliaspagestyle{chapter}{empty}
+\renewcommand{\clearforchapter}{}
+\renewcommand{\chapterheadstart}{}
+\renewcommand{\chaptitlefont}{\center\normalfont\bfseries\Large}
+\setsecheadstyle{\bfseries\large}
+
+\renewcommand{\familydefault}{\sfdefault}
+\newcommand{\otherfamily}{\rmfamily}
+
+\firmlists
+
+\setlength{\vindent}{1em}
+\newenvironment{Verse}%
+	{\begin{verse}\otherfamily\setlength{\baselineskip}{1.1\baselineskip}}%
+	{\end{verse}}
+\newenvironment{LVerse}%
+	{\setlength{\vleftmargin}{0pt}\begin{Verse}}%
+	{\end{Verse}}
+
+\renewcommand{\footnote}[1]{ (#1)}
+
+\newcommand{\coverillustration}[1]{%
+\newgeometry{hmargin={1cm,0cm},vmargin=0.5cm}
+\begin{center}\includegraphics[height=\textheight]{images/#1}\end{center}
+\loadgeometry{normal}}
+
+\newsavebox{\captionBox}
+\newcommand{\fullpageillustration}[2]{%
+\savebox{\captionBox}{\parbox[t]{\textwidth}{\otherfamily#2}}
+\begin{figure}[p]
+	\centering
+	\includegraphics[height=\textheight-\baselineskip-\dp\captionBox]%
+		{images/#1}
+	\caption{#2}
+\end{figure}}
+
+\newsavebox{\illustrationImage}
+\newcommand{\illustration}[2]{%
+\begin{figure}[p]
+	\savebox{\captionBox}{\parbox[t]{\textheight}{\otherfamily#2}}
+	\savebox{\illustrationImage}{%
+		\includegraphics[height=\textwidth-\baselineskip-\dp\captionBox]%
+			{images/#1}}
+	\ifdim\wd\illustrationImage>\textheight
+		\savebox{\illustrationImage}{\includegraphics[width=\textheight]%
+			{images/#1}}
+	\fi
+	\checkoddpage
+	\rotatebox{\ifoddpage-90\else90\fi}{%
+		\begin{minipage}{\textheight}
+			\centering
+			\usebox{\illustrationImage}
+			\caption{#2}
+		\end{minipage}}
+\end{figure}}
+
+\setlength{\abovecaptionskip}{0pt}
+\setlength{\belowcaptionskip}{0pt}
+
+\captiondelim{}
+\captiontitlefont{\otherfamily}
+\makeatletter
+\let\memoir@makecaption\@makecaption
+\long\def\@makecaption#1#2{\memoir@makecaption{}{#2}}
+\makeatother
+
+\raggedbottom
+%\setlength{\parskip}{0pt plus 2ex}
+
+\pretolerance=0
+%\tolerance=750
+\tolerance=5000
+\clubpenalty=10000
+\widowpenalty=10000
+
+\hyphenpenalty=0
+\lefthyphenmin=1
+\righthyphenmin=2
+\doublehyphendemerits=0
+\finalhyphendemerits=0
+
+\begin{document}
+\include{01-frontmatter}
+\include{02-vandoruton}
+\include{03-Peking}
+\include{04-Kamakura}
+\include{05-Toronto}
+\include{06-Amerika}
+\include{07-Mexiko}
+\include{08-Del-Amerika}
+\include{09-Iran}
+\include{10-others}
+\include{11-Berlin}
+\include{12-tajak-varosok-pillanathangulatok}
+\include{13-kapcsolatok}
+\include{14-transzformacio}
+\include{15-backmatter}
+\end{document}
